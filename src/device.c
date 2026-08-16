@@ -48,6 +48,7 @@
 #include "cressi_edy.h"
 #include "cressi_leonardo.h"
 #include "cressi_goa.h"
+#include "cressi_davinci.h"
 #include "zeagle_n2ition3.h"
 #include "atomics_cobalt.h"
 #include "shearwater_petrel.h"
@@ -195,6 +196,9 @@ dc_device_open (dc_device_t **out, dc_context_t *context, dc_descriptor_t *descr
 		break;
 	case DC_FAMILY_CRESSI_GOA:
 		rc = cressi_goa_device_open (&device, context, iostream);
+		break;
+	case DC_FAMILY_CRESSI_DAVINCI:
+		rc = cressi_davinci_device_open (&device, context, iostream);
 		break;
 	case DC_FAMILY_ZEAGLE_N2ITION3:
 		rc = zeagle_n2ition3_device_open (&device, context, iostream);

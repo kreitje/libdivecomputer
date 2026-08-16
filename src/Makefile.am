@@ -56,6 +56,7 @@ libdivecomputer_la_SOURCES = \
 	cressi_edy.h cressi_edy.c cressi_edy_parser.c \
 	cressi_leonardo.h cressi_leonardo.c cressi_leonardo_parser.c \
 	cressi_goa.h cressi_goa.c cressi_goa_parser.c \
+	cressi_davinci.h cressi_davinci.c cressi_davinci_parser.c \
 	zeagle_n2ition3.h zeagle_n2ition3.c \
 	atomics_cobalt.h atomics_cobalt.c atomics_cobalt_parser.c \
 	shearwater_common.h shearwater_common.c \

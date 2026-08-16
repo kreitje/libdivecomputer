@@ -62,6 +62,7 @@ static int dc_filter_deepblu (const dc_descriptor_t *descriptor, dc_transport_t 
 static int dc_filter_oceans (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
 static int dc_filter_divesoft (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
 static int dc_filter_cressi (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
+static int dc_filter_cressi_davinci (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
 static int dc_filter_halcyon (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
 static int dc_filter_seac (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata);
 
@@ -356,6 +357,7 @@ static const dc_descriptor_t g_descriptors[] = {
 	{"Cressi", "Michelangelo", DC_FAMILY_CRESSI_GOA, 5, DC_TRANSPORT_SERIAL | DC_TRANSPORT_BLE, dc_filter_cressi},
 	{"Cressi", "Neon",     DC_FAMILY_CRESSI_GOA, 9, DC_TRANSPORT_SERIAL | DC_TRANSPORT_BLE, dc_filter_cressi},
 	{"Cressi", "Nepto",    DC_FAMILY_CRESSI_GOA, 10, DC_TRANSPORT_SERIAL | DC_TRANSPORT_BLE, dc_filter_cressi},
+	{"Cressi", "Davinci",  DC_FAMILY_CRESSI_DAVINCI, 0, DC_TRANSPORT_BLE, dc_filter_cressi_davinci},
 	/* Zeagle N2iTiON3 */
 	{"Zeagle",    "N2iTiON3",   DC_FAMILY_ZEAGLE_N2ITION3, 0, DC_TRANSPORT_SERIAL, NULL},
 	{"Apeks",     "Quantum X",  DC_FAMILY_ZEAGLE_N2ITION3, 0, DC_TRANSPORT_SERIAL, NULL},
@@ -945,6 +947,20 @@ dc_filter_cressi (const dc_descriptor_t *descriptor, dc_transport_t transport, c
 
 	if (transport == DC_TRANSPORT_BLE) {
 		return DC_FILTER_INTERNAL (userdata, model, 0, dc_match_cressi);
+	}
+
+	return 1;
+}
+
+static int
+dc_filter_cressi_davinci (const dc_descriptor_t *descriptor, dc_transport_t transport, const void *userdata)
+{
+	static const char * const bluetooth[] = {
+		"DAV",
+	};
+
+	if (transport == DC_TRANSPORT_BLE) {
+		return DC_FILTER_INTERNAL (userdata, bluetooth, 0, dc_match_prefix_with_number);
 	}
 
 	return 1;
